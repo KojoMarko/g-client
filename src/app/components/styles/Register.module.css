@@ -1,0 +1,110 @@
+/* components/styles/Register.module.css */
+.registerSection {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1039px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.title {
+    font-size: 40px;
+    line-height: 48px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #333;
+}
+
+.highlightContainer { /* Style for the highlight container */
+    display: flex;
+    justify-content: center; /* Center the highlights */
+    margin-bottom: 40px; /* Add some space below */
+}
+
+.featureHighlights {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 30px;
+}
+
+.featureItem {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center text within highlight boxes */
+}
+
+.featureTitle {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #0056b3;
+}
+
+.formContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.formColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #333;
+}
+
+.input,
+.select,
+.textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+.additionalFields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for additional fields */
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.checkboxLabel {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically align checkbox and label */
+    cursor: pointer; /* Make label clickable */
+}
+
+.checkboxLabel input[type="checkbox"] {
+    margin-right: 8px; /* Add some space between checkbox and label */
+}
+
+.registerButton {
+    background-color: #0056b3;
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 
+}

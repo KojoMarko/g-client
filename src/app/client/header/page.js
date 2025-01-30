@@ -10,7 +10,7 @@ export default function Header() {
           </a>
         </Link>
       </div>
-      <ul className="nav-links">
+      <ul className="nav-links"> 
         <li>
           <Link href="/home">Home</Link>
         </li>

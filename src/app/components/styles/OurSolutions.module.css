@@ -1,0 +1,86 @@
+/* components/styles/OurSolutions.module.css */
+.ourSolutions {
+    padding: 0;
+    background-color: #f8f9fa;
+    margin: 80px 201px;
+}
+
+.container {
+    max-width: 1061px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.title {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 700;
+    padding: 0;
+    margin: 12px 0;
+    color: #333;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 24px;
+    margin: 12px 0;
+    font-weight: 400;
+    color: #666;
+    padding: 0;
+}
+
+.cardContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+    margin-top: 56px;
+}
+
+.card {
+    background-color: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.icon {
+    margin: 0;
+}
+
+.cardTitle {
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 600;
+    color: #333;
+    margin-top: 16px;
+}
+
+.cardDescription {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 16px; /* Push price to bottom */
+    font-weight: 400;
+    color: #666;
+}
+
+.price {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .cardContainer {
+        grid-template-columns: 1fr;
+    }
+}
