@@ -1,6 +1,8 @@
-// components/Register.js
+'use client';
 import { Lato, Inter } from 'next/font/google';
 import styles from './styles/Register.module.css';
+import { useState } from 'react';
+import { SquareUserRound, User, Mail, MapPin, GraduationCap, Accessibility, Phone, Image, DollarSign } from 'lucide-react'; // Import all icons
 
 const lato = Lato({
     subsets: ['latin'],
@@ -15,96 +17,185 @@ const inter = Inter({
 });
 
 const Register = () => {
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        location: '',
+        module: '',
+        gender: '',
+        disabled: '',
+        phone: '',
+        image: null,
+        amount: '',
+        description: '',
+    });
+
+    const handleChange = (e) => {
+        const { name, value, type } = e.target;
+        setFormData({
+            ...formData,
+            [name]: type === 'file' ? e.target.files[0] : value,
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('/api/register', { // Replace with your API endpoint
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Registration failed');
+            }
+
+            console.log('Registration successful!');
+            setFormData({ // Reset the form
+                firstName: '',
+                lastName: '',
+                email: '',
+                location: '',
+                module: '',
+                gender: '',
+                disabled: '',
+                phone: '',
+                image: null,
+                amount: '',
+                description: '',
+            });
+
+            alert("Registration Successful!"); // User feedback
+
+        } catch (error) {
+            console.error('Registration error:', error);
+            alert(error.message); // User-friendly error message
+        }
+    };
+
     return (
-        <section className={styles.registerSection}>
-            <div className={styles.container}>
-                <h2 className={`${styles.title} ${lato.className}`}>Register</h2>
-
-                <div className={styles.highlightContainer}> {/* Highlights above the form */}
-                    <div className={styles.featureHighlights}>
-                        <div className={styles.featureItem}>
-                            <h3 className={`${styles.featureTitle} ${lato.className}`}>Sign Up and Choose Your Course</h3>
-                            <p className={inter.className}>Create your account quickly with just your email or social media login, then explore a wide range</p>
-                        </div>
-                        <div className={styles.featureItem}>
-                            <h3 className={`${styles.featureTitle} ${lato.className}`}>Onboarding</h3>
-                            <p className={inter.className}>Get a guided onboarding experience to set up your learning preferences.</p>
-                        </div>
-                        <div className={styles.featureItem}>
-                            <h3 className={`${styles.featureTitle} ${lato.className}`}>Start Learning</h3>
-                            <p className={inter.className}>Access courses, complete lessons, and track your progress effortlessly.</p>
-                        </div>
-                    </div>
+        <section className={styles.register}>
+            <div className={styles['register-container']}>
+                <div className={styles['register-steps']}>
+                    {/* ... steps content ... */}
                 </div>
 
+                <div className={styles['register-form-container']}>
+                    <h2 className={styles.registerHeading}>Register</h2>
+                    <form className={styles['register-form']} onSubmit={handleSubmit}>
+                        <div className={styles['form-row']}>
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <User className={styles['input-icon']} />
+                                        <input type="text" id="firstName" name="firstName" placeholder="First name" required value={formData.firstName} onChange={handleChange} className={styles.input} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <User className={styles['input-icon']} />
+                                        <input type="text" id="lastName" name="lastName" placeholder="Last name" required value={formData.lastName} onChange={handleChange} className={styles.input} />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <Mail className={styles['input-icon']} />
+                                        <input type="text" id="email" name="email" placeholder="Email" required value={formData.email} onChange={handleChange} className={styles.input} />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <MapPin className={styles['input-icon']} />
+                                        <input type="text" id="location" name="location" placeholder="Location" required value={formData.location} onChange={handleChange} className={styles.input} />
+                                    </div>
+                                </div>
+                            </div>
 
-                <div className={styles.formContainer}>
-                    <div className={styles.formColumn}>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="firstName">First Name</label>
-                            <input className={`${styles.input} ${inter.className}`} type="text" id="firstName" name="firstName" />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="email">Email</label>
-                            <input className={`${styles.input} ${inter.className}`} type="email" id="email" name="email" />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="lastName">Last Name</label>
-                            <input className={`${styles.input} ${inter.className}`} type="text" id="lastName" name="lastName" />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="location">Location</label>
-                            <select className={`${styles.select} ${inter.className}`} id="location" name="location">
-                                <option value="">Select location</option>
-                                <option value="ghana">Ghana</option>
-                                <option value="nigeria">Nigeria</option>
-                            </select>
-                        </div>
-                    </div>
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <GraduationCap className={styles['input-icon']} />
+                                        <select name="module" required value={formData.module} onChange={handleChange} className={styles.input}>
+                                            <option value="">Choose module</option>
+                                            <option value="software-development">Software Development</option>
+                                            <option value="data-science">Data Science</option>
+                                            <option value="cloud-computing">Cloud Computing</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div className={styles.formColumn}>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="module">Choose Module</label>
-                            <select className={`${styles.select} ${inter.className}`} id="module" name="module">
-                                <option value="">Select module</option>
-                                <option value="software">Software Development</option>
-                                <option value="data">Data Science</option>
-                            </select>
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <SquareUserRound className={styles['input-icon']} />
+                                        <select name="gender" required value={formData.gender} onChange={handleChange} className={styles.input}>
+                                            <option value="">Gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <Accessibility className={styles['input-icon']} />
+                                        <select name="disabled" required value={formData.disabled} onChange={handleChange} className={styles.input}>
+                                            <option value="">Disabled</option>
+                                            <option value="yes">Yes</option>
+                                            <option value="no">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className={styles['form-group']}>
+                                <div className={styles['input-container']}>
+                                    <div className={styles['input-wrapper']}>
+                                        <Phone className={styles['input-icon']} />
+                                        <input type="text" id="phone" name="phone" placeholder="Phone" required value={formData.phone} onChange={handleChange} className={styles.input} />
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Full-width elements */}
+                            <div className={styles['image-upload-container']}>
+                                <div className={styles['input-wrapper']}>
+                                    <Image className={styles['input-icon']} />
+                                    <input type="file" id="image" name="image" required onChange={handleChange} className={styles.input} aria-label="Upload Image" />
+                                </div>
+                            </div>
+
+                            <div className={styles['amount-input-container']}>
+                                <div className={styles['input-wrapper']}>
+                                    <DollarSign className={styles['input-icon']} />
+                                    <input type="text" id="amount" name="amount" placeholder="Amount" required value={formData.amount} onChange={handleChange} className={styles.input} />
+                                </div>
+                            </div>
+
+                            <div className={styles['description-textarea-container']}>
+                                <textarea id="description" name="description" placeholder="Description" rows="4" required value={formData.description} onChange={handleChange} className={styles.textarea} aria-label="Description"></textarea>
+                            </div>
+
+                            <button type="submit" className={styles['register-button']}>Register</button>
                         </div>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="gender">Gender</label>
-                            <select className={`${styles.select} ${inter.className}`} id="gender" name="gender">
-                                <option value="">Select gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                            </select>
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="amount">Amount</label>
-                            <input className={`${styles.input} ${inter.className}`} type="number" id="amount" name="amount" />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label className={`${styles.label} ${inter.className}`} htmlFor="phone">Phone</label>
-                            <input className={`${styles.input} ${inter.className}`} type="tel" id="phone" name="phone" />
-                        </div>
-                    </div>
+                    </form>
                 </div>
-
-                <div className={styles.additionalFields}> {/* Wrap additional fields */}
-                    <div className={styles.inputGroup}>
-                        <label className={`${styles.label} ${inter.className}`} htmlFor="image">Updated Image</label>
-                        <input className={`${styles.input} ${inter.className}`} type="file" id="image" name="image" />
-                    </div>
-                    <div className={styles.inputGroup}>
-                        <label className={`${styles.label} ${inter.className} ${styles.checkboxLabel}`} htmlFor="disabled">
-                            <input type="checkbox" id="disabled" name="disabled" />
-                            Disabled
-                        </label>
-                    </div>
-                </div>
-
-                <button className={`${styles.registerButton} ${inter.className}`}>Register</button>
             </div>
         </section>
     );
