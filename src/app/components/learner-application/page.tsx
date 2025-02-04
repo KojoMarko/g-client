@@ -13,7 +13,7 @@ export default function Home() {
       <div>
         <Navbar />
         <Dashboard />
-        <Register />
+        <OopsAP />
         <Footer />
       </div>
     );
